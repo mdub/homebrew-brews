@@ -9,8 +9,10 @@ class Swa < Formula
   depends_on "ruby"
 
   def install
+    ENV.prepend_path "PATH", Formula["ruby"].opt_bin
     ENV["BUNDLE_VERSION"] = "system"
     ENV["GEM_HOME"] = libexec
+    ENV["GEM_PATH"] = libexec
 
     system "bundle", "config", "set", "without", "development", "test"
     system "bundle", "install"
@@ -19,7 +21,8 @@ class Swa < Formula
 
     bin.install libexec/"bin/#{name}"
     bin.env_script_all_files libexec/"bin",
-      GEM_HOME: ENV["GEM_HOME"]
+      GEM_HOME: ENV["GEM_HOME"],
+      GEM_PATH: ENV["GEM_PATH"]
   end
 
   test do
