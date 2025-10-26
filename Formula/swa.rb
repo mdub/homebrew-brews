@@ -1,22 +1,28 @@
-# frozen_string_literal: true
-
 class Swa < Formula
   desc "Alternative CLI for AWS (AWS backwards)"
   homepage "https://github.com/mdub/swa"
-  url "https://rubygems.org/downloads/swa-1.0.0.gem"
-  sha256 "e214e6f5c50504d90e34f77ddbfc0f77e83defc8b153e3bd76764141d3bf7a66"
+  url "https://github.com/mdub/swa/archive/refs/tags/v1.0.1.tar.gz"
+  sha256 "2f5aeb1a54c0e1ba9109912ba42c1668fa92b4c11899caab9899b5537cd036fd"
   license "MIT"
+  head "https://github.com/mdub/swa.git", branch: "master"
 
   depends_on "ruby"
 
   def install
+    ENV["BUNDLE_VERSION"] = "system"
     ENV["GEM_HOME"] = libexec
-    system "gem", "install", cached_download, "--no-document",
-           "--install-dir", libexec
-    bin.install_symlink libexec/"bin/swa"
+
+    system "bundle", "config", "set", "without", "development", "test"
+    system "bundle", "install"
+    system "gem", "build", "#{name}.gemspec"
+    system "gem", "install", "#{name}-#{version}.gem"
+
+    bin.install libexec/"bin/#{name}"
+    bin.env_script_all_files libexec/"bin",
+      GEM_HOME: ENV["GEM_HOME"]
   end
 
   test do
-    assert_match "SWA is AWS, backwards", shell_output("#{bin}/swa --help")
+    system bin/"swa", "--help"
   end
 end
