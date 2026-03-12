@@ -1,24 +1,19 @@
-# Homebrew Tap for SWA
+# mdub/brews
 
-This is a [Homebrew](https://brew.sh) tap for [swa](https://github.com/mdub/swa), an alternative CLI for AWS.
+A [Homebrew](https://brew.sh) tap for miscellaneous tools.
 
-## Installation
-
-```bash
-brew tap mdub/swa
-brew install swa
-```
-
-## Upgrading
+## Usage
 
 ```bash
-brew update
-brew upgrade swa
+brew tap mdub/brews
+brew install <formula>
 ```
 
-## About SWA
+## Available formula
 
-SWA is AWS, backwards. It's an alternative CLI for AWS that puts verbs at the end:
+### swa
+
+An alternative CLI for AWS that puts verbs at the end:
 
 ```bash
 $ swa ec2 instance i-9336f049 terminate
@@ -30,4 +25,4 @@ rather than the front:
 $ aws ec2 terminate-instances --instance-ids i-9336f049
 ```
 
-For more information, see the [main repository](https://github.com/mdub/swa).
+For more information, see the [swa repository](https://github.com/mdub/swa).
