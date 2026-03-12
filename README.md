@@ -26,3 +26,9 @@ $ aws ec2 terminate-instances --instance-ids i-9336f049
 ```
 
 For more information, see the [swa repository](https://github.com/mdub/swa).
+
+### dbq
+
+A simple CLI for executing SQL queries against Databricks.
+
+For more information, see the [dbq repository](https://github.com/mdub/dbq).
